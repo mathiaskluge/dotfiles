@@ -22,19 +22,19 @@ run_brew_bundle() {
     else
         error "Brewfile not found"
         return 1
-    fi
-}
+        fi
+    }
 
-if [ "$(basename "$0")" = "$(basename "${BASH_SOURCE[0]}")" ]; then
-    # Check if Homebrew is installed
-    if ! command -v brew &>/dev/null; then
-        error "Homebrew is not installed. Please install Homebrew first."
-        exit 1
-    fi
+    if [ "$(basename "$0")" = "$(basename "${BASH_SOURCE[0]}")" ]; then
+        # Check if Homebrew is installed
+        if ! command -v brew &>/dev/null; then
+            error "Homebrew is not installed. Please install Homebrew first."
+            exit 1
+        fi
 
-    read -p "Install Brew bundle? [y/n] " install_bundle
+        read -p "Install Brew bundle? [y/n] " install_bundle
 
-    if [[ "$install_bundle" == "y" ]]; then
-        run_brew_bundle
-    fi
-fi
+        if [[ "$install_bundle" == "y" ]]; then
+            run_brew_bundle
+        fi
+        fi
