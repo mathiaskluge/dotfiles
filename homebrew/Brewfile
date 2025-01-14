@@ -1,0 +1,29 @@
+tap "homebrew/bundle"
+
+brew "node"
+brew "go"
+brew "neovim"
+brew "gh"
+
+# Terminal
+brew "zsh-autosuggestions"
+brew "zsh-syntax-highlighting"
+brew "tmux"
+brew "tpm"
+brew "eza"
+brew "ripgrep"
+
+# Apps
+cask "docker"
+cask "keepingyouawake"
+cask "yaak"
+cask "Ghostty"
+cask "aerospace"
+cask "font-jetbrains-mono-nerd-font"
+cask "firefox"
+cask "arc"
+cask "raycast"
+cask "visual-studio-code"
+cask "obsidian"
+cask "vlc"
+
