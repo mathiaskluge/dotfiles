@@ -8,6 +8,8 @@ alias glo='git pull origin'
 alias gpo='git push origin'
 alias gc='git commit -v'
 alias gcm='git commit -m'
+alias gmom='git fetch && git merge origin/main'
+alias gcl='git reset --hard && git clean -fd'
 
 # Folders
 alias ws="$HOME/workspace"
