@@ -27,7 +27,7 @@ return {
                 ensure_installed = {
                     "stylua",
                     "prettier",
-                    "gofmt",
+                    "goimports",
                 },
             })
         end,
