@@ -7,6 +7,9 @@ Contains my configs and scripts to setup a consistent macOS environment across d
 To start the setup, run:
 
 ```
+# if not executable
+chmod +x install.sh
+
 ./install.sh
 ```
 
