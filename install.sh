@@ -65,7 +65,7 @@ fi
 info "Initializing chezmoi..."
 if [[ -d "$HOME/.local/share/chezmoi" ]]; then
     info "chezmoi already initialized, updating..."
-    chezmoi update
+    chezmoi update --apply
 else
     chezmoi init --apply mathiaskluge/dotfiles
 fi
