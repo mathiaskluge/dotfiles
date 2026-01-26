@@ -1,0 +1,22 @@
+#!/bin/bash
+# Brewfile hash: {{ include "Brewfile" | sha256sum }}
+
+set -e
+
+echo "==> Installing Homebrew packages..."
+
+# Check if Homebrew is installed
+if ! command -v brew &>/dev/null; then
+    echo "ERROR: Homebrew is not installed. Please run install.sh first."
+    exit 1
+fi
+
+# Run brew bundle using the global Brewfile
+if brew bundle check --global >/dev/null 2>&1; then
+    echo "==> All Brewfile dependencies are already satisfied."
+else
+    echo "==> Installing missing packages..."
+    brew bundle install --global
+fi
+
+echo "==> Homebrew packages installed successfully."

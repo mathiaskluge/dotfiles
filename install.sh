@@ -1,58 +1,77 @@
 #!/bin/bash
 
-. scripts/utils.sh
-. scripts/prerequisites.sh
-. scripts/brew-install.sh
-. scripts/osx-defaults.sh
-. scripts/symlinks.sh
+set -e
 
+# Colors for output
+RED=$(tput setaf 1)
+GREEN=$(tput setaf 2)
+BLUE=$(tput setaf 4)
+RESET=$(tput sgr0)
 
-info "Dotfiles intallation initialized..."
-read -p "Install apps? [y/n] " install_apps
-read -p "Overwrite existing dotfiles? [y/n] " overwrite_dotfiles
+info() {
+    printf "${BLUE}==> %s${RESET}\n" "$1"
+}
 
-if [[ "$install_apps" == "y" ]]; then
-    printf "\n"
-    info "===================="
-    info "Prerequisites"
-    info "===================="
+success() {
+    printf "${GREEN}==> %s${RESET}\n" "$1"
+}
 
-    install_xcode
-    install_homebrew
+error() {
+    printf "${RED}==> %s${RESET}\n" "$1"
+}
 
-    printf "\n"
-    info "===================="
-    info "Apps"
-    info "===================="
-
-    run_brew_bundle
+# Check if running on macOS
+if [[ "$OSTYPE" != "darwin"* ]]; then
+    error "This script is only for macOS"
+    exit 1
 fi
 
-printf "\n"
-info "===================="
-info "OSX System Defaults"
-info "===================="
+info "Dotfiles installation initialized..."
 
-apply_osx_system_defaults
-
-printf "\n"
-info "===================="
-info "Terminal"
-info "===================="
-
-info "Adding .hushlogin file to suppress 'last login' message in terminal..."
-touch ~/.hushlogin
-
-printf "\n"
-info "===================="
-info "Symbolic Links"
-info "===================="
-
-chmod +x ./scripts/symlinks.sh
-if [[ "$overwrite_dotfiles" == "y" ]]; then
-    warning "Deleting existing dotfiles..."
-    ./scripts/symlinks.sh --delete --include-files
+# Install Xcode Command Line Tools
+info "Installing Xcode Command Line Tools..."
+if xcode-select -p >/dev/null 2>&1; then
+    info "Xcode Command Line Tools already installed"
+else
+    xcode-select --install
+    info "Please complete the Xcode installation and re-run this script"
+    exit 0
 fi
-./scripts/symlinks.sh --create
 
-success "Dotfiles set up successfully."
+# Install Homebrew
+info "Installing Homebrew..."
+if command -v brew &>/dev/null; then
+    info "Homebrew already installed"
+else
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+    # Add Homebrew to PATH for this session
+    if [[ -d "/opt/homebrew/bin" ]]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    elif [[ -d "/usr/local/bin" ]]; then
+        eval "$(/usr/local/bin/brew shellenv)"
+    fi
+fi
+
+# Install chezmoi
+info "Installing chezmoi..."
+if command -v chezmoi &>/dev/null; then
+    info "chezmoi already installed"
+else
+    brew install chezmoi
+fi
+
+# Initialize chezmoi with this repository
+info "Initializing chezmoi..."
+if [[ -d "$HOME/.local/share/chezmoi" ]]; then
+    info "chezmoi already initialized, updating..."
+    chezmoi update
+else
+    chezmoi init --apply mathiaskluge/dotfiles
+fi
+
+success "Dotfiles installation complete!"
+echo ""
+info "To update your dotfiles in the future, run: chezmoi update"
+info "To see what would change, run: chezmoi diff"
+info "To manually apply changes, run: chezmoi apply"
