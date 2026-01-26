@@ -1,27 +1,25 @@
 tap "homebrew/bundle"
 
-brew "node"
-brew "go"
-brew "neovim"
-brew "gh"
 
 # Terminal
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
-brew "tmux"
-brew "tpm"
 brew "eza"
 brew "ripgrep"
 
 # Apps
 cask "1password"
-cask "docker"
 cask "keepingyouawake"
 cask "yaak"
 cask "ghostty"
 cask "nikitabobko/tap/aerospace"
 cask "font-jetbrains-mono-nerd-font"
-cask "zen-browser"
 cask "obsidian"
-cask "vlc"
+cask "alfred"
+cask "claude-code"
+cask "firefox"
+cask "google-chrome"
+cask "proton-mail-bridge"
+cask "protonvpn"
+cask "numi"
 
