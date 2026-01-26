@@ -1,3 +1,6 @@
 README.md
 .git/
 .DS_Store
+.chezmoiroot
+claude.md
+install.sh
