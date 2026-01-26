@@ -135,7 +135,7 @@ dotfiles/
     ├── .chezmoiscripts/         # Auto-run scripts
     │   ├── run_onchange_after_install-packages.sh.tmpl
     │   └── run_once_after_setup-macos.sh.tmpl
-    ├── Brewfile                 # Homebrew package definitions
+    ├── dot_Brewfile             # Homebrew package definitions (~/.Brewfile)
     ├── dot_gitconfig.tmpl       # Git configuration
     ├── dot_zshrc                # Zsh configuration
     ├── dot_hushlogin            # Suppress login message
