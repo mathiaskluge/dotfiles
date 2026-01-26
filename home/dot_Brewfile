@@ -1,10 +1,9 @@
-tap "homebrew/bundle"
-
 # Terminal
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 brew "eza"
 brew "ripgrep"
+brew "neovim"
 
 # Apps
 cask "1password"
@@ -22,4 +21,3 @@ cask "proton-mail-bridge"
 cask "protonvpn"
 cask "numi"
 cask "zed"
-cask "nvim"
