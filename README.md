@@ -133,7 +133,7 @@ dotfiles/
 ├── .chezmoiignore              # Files to ignore
 └── home/                        # Chezmoi source directory
     ├── .chezmoiscripts/         # Auto-run scripts
-    │   ├── run_onchange_before_install-packages.sh.tmpl
+    │   ├── run_onchange_after_install-packages.sh.tmpl
     │   └── run_once_after_setup-macos.sh.tmpl
     ├── Brewfile                 # Homebrew package definitions
     ├── dot_gitconfig.tmpl       # Git configuration
