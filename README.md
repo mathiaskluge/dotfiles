@@ -42,33 +42,3 @@ Note:
 chezmoi update
 
 ```
-
----
-
-## Keybindings Reference
-
-### AeroSpace (Window Manager)
-*Prefix: `alt` (⌥)*
-
-**Navigation**
-- `⌥h/j/k/l` - Focus window
-- `⌥⇧h/j/k/l` - Move window
-- `⌥1-4` - Switch workspace
-- `⌥⇧1-4` - Move to workspace
-
-**Layout**
-- `⌥/` - Toggle split direction
-- `⌥⇧;` - Service mode
-
-### Tmux
-*Prefix: `Ctrl-Space` (⌃⎵)*
-
-**Windows**
-- `⌃⎵c` - New window
-- `⌃⎵p/n` - Previous/next window
-- `⌃⎵0-9` - Go to window
-
-**Panes**
-- `⌃⎵%` - Split horizontal
-- `⌃⎵"` - Split vertical
-- `⌃h/j/k/l` - Navigate (vim-style)
