@@ -1,22 +1,21 @@
-# Terminal
+
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 brew "eza"
+brew "tmux"
 brew "ripgrep"
 brew "neovim"
 
-# Apps
+cask "firefox"
+cask "google-chrome"
+cask "ghostty"
+cask "font-jetbrains-mono-nerd-font"
 cask "1password"
 cask "keepingyouawake"
 cask "yaak"
-cask "ghostty"
 cask "nikitabobko/tap/aerospace"
-cask "font-jetbrains-mono-nerd-font"
 cask "obsidian"
 cask "alfred"
-cask "claude-code"
-cask "firefox"
-cask "google-chrome"
 cask "proton-mail-bridge"
 cask "protonvpn"
 cask "numi"

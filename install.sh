@@ -67,7 +67,12 @@ if [[ -d "$HOME/.local/share/chezmoi" ]]; then
     info "chezmoi already initialized, updating..."
     chezmoi update --apply
 else
-    chezmoi init --apply mathiaskluge/dotfiles
+    # Prompt for GitHub username (defaults to mathiaskluge)
+    echo ""
+    read -p "GitHub username for dotfiles repo [{github_username}/dotfiles]: " github_user
+    github_user=${github_user:-mathiaskluge}
+
+    chezmoi init --apply ${github_user}/dotfiles
 fi
 
 success "Dotfiles installation complete!"
