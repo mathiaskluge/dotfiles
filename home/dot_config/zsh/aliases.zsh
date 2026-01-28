@@ -13,7 +13,7 @@ alias gcl='git reset --hard && git clean -fd'
 
 # Folders
 alias ws="$HOME/workspace"
-alias 101="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/101"
+alias 101="$HOME/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/101"
 
 # eza
 alias ls="eza --all --icons=always"
