@@ -22,7 +22,7 @@ Chezmoi uses special prefixes:
 `.chezmoi.toml.tmpl` defines user variables via `promptStringOnce`:
 - Prompts appear during `chezmoi init --apply`
 - Variables available in `.tmpl` files as `{{ .variable }}`
-- Currently used: `{{ .name }}` and `{{ .email }}` in `home/dot_gitconfig.tmpl`
+- Currently not used (gitconfig has hardcoded values)
 
 ### Auto-Run Scripts
 `home/.chezmoiscripts/` contains scripts that execute during `chezmoi apply`:

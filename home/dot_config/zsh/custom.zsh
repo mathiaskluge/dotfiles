@@ -20,4 +20,15 @@ fi
 # Plugins
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-eval "$(starship init zsh)"
+
+# Prompt
+autoload -Uz add-zsh-hook vcs_info
+add-zsh-hook precmd vcs_info
+zstyle ':vcs_info:git:*' formats '%b'
+setopt prompt_subst
+
+function git_dirty() {
+  [[ -n $(git status --porcelain 2>/dev/null) ]] && echo ' ●'
+}
+
+PROMPT='%F{blue}%~%f %F{magenta}${vcs_info_msg_0_}%f%F{yellow}$(git_dirty)%f %(?.%F{green}.%F{red})➜%f '
