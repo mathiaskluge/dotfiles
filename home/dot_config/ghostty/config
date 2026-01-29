@@ -2,8 +2,8 @@ font-family = "JetBrainsMono Nerd Font"
 theme = "Ayu"
 font-size = 15
 
-window-padding-x = 16
-window-padding-y = 16
+window-padding-x = 24
+window-padding-y = 24
 
 macos-titlebar-style = hidden
 macos-option-as-alt = true
