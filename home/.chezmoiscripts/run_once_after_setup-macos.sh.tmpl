@@ -37,10 +37,14 @@ defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
 defaults write com.apple.screencapture type -string "png"
 
+# Set dark mode
+defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
+
 # Set Dock autohide
 defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock orientation -string "left"
 defaults write com.apple.dock magnification -bool true
-defaults write com.apple.dock largesize -float 128
+defaults write com.apple.dock largesize -float 48
 defaults write com.apple.dock "minimize-to-application" -bool true
 defaults write com.apple.dock tilesize -float 32
 
