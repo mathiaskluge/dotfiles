@@ -69,7 +69,7 @@ if [[ -d "$HOME/.local/share/chezmoi" ]]; then
 else
     # Prompt for GitHub username (defaults to mathiaskluge)
     echo ""
-    read -p "GitHub username for dotfiles repo [{github_username}/dotfiles]: " github_user
+    read -p "GitHub username for dotfiles repo [mathiaskluge]: " github_user
     github_user=${github_user:-mathiaskluge}
 
     chezmoi init --apply ${github_user}/dotfiles
