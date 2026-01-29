@@ -2,6 +2,7 @@
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 brew "eza"
+brew "gh"
 brew "tmux"
 brew "tpm"
 brew "ripgrep"
