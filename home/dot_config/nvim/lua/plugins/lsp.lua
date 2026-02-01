@@ -1,57 +1,37 @@
 return {
-	-- LSP Configuration
+	-- Mason (LSP/tool installer)
 	{
-		"neovim/nvim-lspconfig",
-		event = { "BufReadPre", "BufNewFile" },
-		dependencies = {
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
-			"hrsh7th/cmp-nvim-lsp",
+		"williamboman/mason.nvim",
+		cmd = "Mason",
+		build = ":MasonUpdate",
+		opts = {
+			ui = { border = "rounded" },
 		},
-		config = function()
-			-- Setup mason first
-			require("mason").setup({
-				ui = { border = "rounded" },
-			})
+	},
 
-			require("mason-lspconfig").setup({
-				ensure_installed = {
-					"lua_ls",
-					"ts_ls",
-					"jsonls",
-					"html",
-					"cssls",
-				},
-				automatic_installation = true,
-			})
-
-			-- LSP keymaps (set on attach)
-			local on_attach = function(_, bufnr)
-				local map = function(keys, func, desc)
-					vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
-				end
-
-				map("gd", vim.lsp.buf.definition, "Go to definition")
-				map("gD", vim.lsp.buf.declaration, "Go to declaration")
-				map("gr", vim.lsp.buf.references, "Go to references")
-				map("gi", vim.lsp.buf.implementation, "Go to implementation")
-				map("K", vim.lsp.buf.hover, "Hover documentation")
-				map("<leader>la", vim.lsp.buf.code_action, "Code action")
-				map("<leader>lr", vim.lsp.buf.rename, "Rename")
-				map("<leader>ls", vim.lsp.buf.signature_help, "Signature help")
-				map("<leader>lf", function() vim.lsp.buf.format({ async = true }) end, "Format")
-			end
+	-- Mason-lspconfig bridge
+	{
+		"williamboman/mason-lspconfig.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		dependencies = { "williamboman/mason.nvim" },
+		opts = {
+			ensure_installed = {
+				"lua_ls",
+				"ts_ls",
+				"jsonls",
+				"html",
+				"cssls",
+			},
+			automatic_installation = true,
+		},
+		config = function(_, opts)
+			require("mason-lspconfig").setup(opts)
 
 			-- Capabilities for completion
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-			-- Configure individual servers
-			local lspconfig = require("lspconfig")
-
-			-- Lua
-			lspconfig.lua_ls.setup({
-				on_attach = on_attach,
+			-- Configure servers using new vim.lsp.config API (Neovim 0.11+)
+			vim.lsp.config("lua_ls", {
 				capabilities = capabilities,
 				settings = {
 					Lua = {
@@ -66,29 +46,24 @@ return {
 				},
 			})
 
-			-- TypeScript
-			lspconfig.ts_ls.setup({
-				on_attach = on_attach,
+			vim.lsp.config("ts_ls", {
 				capabilities = capabilities,
 			})
 
-			-- JSON
-			lspconfig.jsonls.setup({
-				on_attach = on_attach,
+			vim.lsp.config("jsonls", {
 				capabilities = capabilities,
 			})
 
-			-- HTML
-			lspconfig.html.setup({
-				on_attach = on_attach,
+			vim.lsp.config("html", {
 				capabilities = capabilities,
 			})
 
-			-- CSS
-			lspconfig.cssls.setup({
-				on_attach = on_attach,
+			vim.lsp.config("cssls", {
 				capabilities = capabilities,
 			})
+
+			-- Enable all configured servers
+			vim.lsp.enable({ "lua_ls", "ts_ls", "jsonls", "html", "cssls" })
 
 			-- Diagnostic appearance
 			vim.diagnostic.config({
@@ -98,16 +73,34 @@ return {
 				update_in_insert = false,
 				float = { border = "rounded" },
 			})
+		end,
+	},
 
-			-- Rounded borders for hover/signature
-			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-				vim.lsp.handlers.hover,
-				{ border = "rounded" }
-			)
-			vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-				vim.lsp.handlers.signature_help,
-				{ border = "rounded" }
-			)
+	-- LSP keymaps via LspAttach autocmd
+	{
+		"hrsh7th/cmp-nvim-lsp",
+		lazy = true,
+		config = function()
+			vim.api.nvim_create_autocmd("LspAttach", {
+				group = vim.api.nvim_create_augroup("lsp_keymaps", { clear = true }),
+				callback = function(event)
+					local map = function(keys, func, desc)
+						vim.keymap.set("n", keys, func, { buffer = event.buf, desc = desc })
+					end
+
+					map("gd", vim.lsp.buf.definition, "Go to definition")
+					map("gD", vim.lsp.buf.declaration, "Go to declaration")
+					map("gr", vim.lsp.buf.references, "Go to references")
+					map("gi", vim.lsp.buf.implementation, "Go to implementation")
+					map("K", vim.lsp.buf.hover, "Hover documentation")
+					map("<leader>la", vim.lsp.buf.code_action, "Code action")
+					map("<leader>lr", vim.lsp.buf.rename, "Rename")
+					map("<leader>ls", vim.lsp.buf.signature_help, "Signature help")
+					map("<leader>lf", function()
+						vim.lsp.buf.format({ async = true })
+					end, "Format")
+				end,
+			})
 		end,
 	},
 
@@ -178,7 +171,13 @@ return {
 		event = { "BufWritePre" },
 		cmd = { "ConformInfo" },
 		keys = {
-			{ "<leader>lf", function() require("conform").format({ async = true }) end, desc = "Format" },
+			{
+				"<leader>lf",
+				function()
+					require("conform").format({ async = true })
+				end,
+				desc = "Format",
+			},
 		},
 		opts = {
 			formatters_by_ft = {
