@@ -17,6 +17,7 @@ return {
 				"markdown",
 				"markdown_inline",
 				"python",
+        "go",
 				"rust",
 				"toml",
 				"tsx",
