@@ -1,8 +1,9 @@
 return {
 	-- Telescope (fuzzy finder)
+	-- Note: Using master branch for Neovim 0.11 compatibility (ft_to_lang fix)
 	{
 		"nvim-telescope/telescope.nvim",
-		version = "*",
+		branch = "master",
 		cmd = "Telescope",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
