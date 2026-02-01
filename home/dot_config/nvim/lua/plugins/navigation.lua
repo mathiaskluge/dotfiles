@@ -2,6 +2,7 @@ return {
 	-- Telescope (fuzzy finder)
 	{
 		"nvim-telescope/telescope.nvim",
+		version = "*",
 		cmd = "Telescope",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
@@ -14,14 +15,12 @@ return {
 			},
 		},
 		keys = {
-			-- Find
 			{ "<leader>ff", "<cmd>Telescope find_files<CR>", desc = "Find files" },
 			{ "<leader>fg", "<cmd>Telescope live_grep<CR>", desc = "Live grep" },
 			{ "<leader>fb", "<cmd>Telescope buffers<CR>", desc = "Buffers" },
 			{ "<leader>fr", "<cmd>Telescope oldfiles<CR>", desc = "Recent files" },
 			{ "<leader>fw", "<cmd>Telescope grep_string<CR>", desc = "Grep word under cursor" },
 			{ "<leader>fh", "<cmd>Telescope help_tags<CR>", desc = "Help" },
-			-- Shortcuts
 			{ "<leader><leader>", "<cmd>Telescope buffers<CR>", desc = "Buffers" },
 			{ "<leader>/", "<cmd>Telescope live_grep<CR>", desc = "Grep" },
 		},

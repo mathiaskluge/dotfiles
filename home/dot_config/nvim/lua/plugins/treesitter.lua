@@ -1,14 +1,13 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		build = ":TSUpdate",
 		lazy = false,
+		build = ":TSUpdate",
 		config = function()
-			local ts = require("nvim-treesitter")
-			ts.setup()
+			require("nvim-treesitter").setup({})
 
-			-- Install parsers
-			ts.install({
+			-- Async install parsers (non-blocking)
+			require("nvim-treesitter").install({
 				"bash",
 				"css",
 				"html",
@@ -27,7 +26,7 @@ return {
 				"yaml",
 			})
 
-			-- Enable treesitter features via FileType autocmd
+			-- Enable highlighting and indentation for filetypes
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = {
 					"bash", "sh", "css", "html", "javascript", "json", "lua",
@@ -35,25 +34,20 @@ return {
 					"vim", "yaml",
 				},
 				callback = function()
-					-- Syntax highlighting (built-in)
 					vim.treesitter.start()
-					-- Indentation (nvim-treesitter)
 					vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 				end,
 			})
 		end,
 	},
 
-	-- Treesitter text objects
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		event = { "BufReadPost", "BufNewFile" },
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		config = function()
-			-- Text object keymaps
 			local map = vim.keymap.set
 
-			-- Select text objects
 			map({ "x", "o" }, "af", function()
 				require("nvim-treesitter-textobjects.select").select_textobject("@function.outer", "textobjects")
 			end, { desc = "Around function" })
@@ -70,7 +64,6 @@ return {
 				require("nvim-treesitter-textobjects.select").select_textobject("@class.inner", "textobjects")
 			end, { desc = "Inside class" })
 
-			-- Move between functions
 			map("n", "]f", function()
 				require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer", "textobjects")
 			end, { desc = "Next function" })
