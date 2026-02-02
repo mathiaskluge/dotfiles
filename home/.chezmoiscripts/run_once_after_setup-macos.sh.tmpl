@@ -47,6 +47,13 @@ defaults write com.apple.dock magnification -bool true
 defaults write com.apple.dock largesize -float 48
 defaults write com.apple.dock "minimize-to-application" -bool true
 defaults write com.apple.dock tilesize -float 32
+defaults write com.apple.dock show-recents -bool false
+
+# Hide Siri from menu bar (may require logout)
+defaults write com.apple.Siri StatusMenuVisible -bool false
+
+# Show Weather in menu bar
+defaults -currentHost write com.apple.controlcenter Weather -int 18
 
 # Restart affected services so changes apply immediately
 killall Finder Dock SystemUIServer >/dev/null 2>&1 || true
