@@ -103,10 +103,10 @@ Lazy UI:
 
 ---
 
-### Manage configs
+### Pull updates on a machine
 
 ```bash
-# Fetch and Apply changes to dotfiles repo
 chezmoi update
-
 ```
+
+Optional: `chezmoi status` shows pending differences. `chezmoi apply` reapplies the current source state without fetching remote changes.
