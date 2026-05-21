@@ -4,8 +4,6 @@ My macOS dotfiles managed with [chezmoi](https://www.chezmoi.io/) and [Homebrew]
 
 Sets up a new Mac with on command and manages configs accross devices.
 
----
-
 ## What it does
 
 1. InstallsXcode CLI tools, Homebrew, chezmoi
@@ -13,15 +11,11 @@ Sets up a new Mac with on command and manages configs accross devices.
 3. Applies macOS settings
 4. Installs software via homebrew
 
----
-
 ## Setup
 
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/mathiaskluge/dotfiles/main/install.sh)"
 ```
-
----
 
 ## How to use
 
@@ -33,13 +27,21 @@ Note:
 - [run_once_after_setup-macos.sh.tmpl](https://github.com/mathiaskluge/dotfiles/blob/main/home/.chezmoiscripts/run_once_after_setup-macos.sh.tmpl) applies macOS settings. Customize or remove
 - [.chezmoi.toml.tmpl](https://github.com/mathiaskluge/dotfiles/blob/main/.chezmoi.toml.tmpl) captures name and email to be used in e.g. a gitconfig. Use or remove.
 
----
+## Updates
 
-## Daily shortcuts
+After changes to dotfile repo run on local machine
 
-Current leaders/modifiers: `tmux = Ctrl+s`, `AeroSpace = Alt`, `nvim = Space`
+```bash
+chezmoi update
+```
+
+Optional: `chezmoi status` shows pending differences. `chezmoi apply` reapplies the current source state without fetching remote changes.
+
+## Keybindings
 
 ### tmux
+
+Leader: `Ctrl+s`
 
 | Action | Keys |
 | --- | --- |
@@ -53,18 +55,20 @@ Current leaders/modifiers: `tmux = Ctrl+s`, `AeroSpace = Alt`, `nvim = Space`
 
 ### AeroSpace
 
+Leader: `Option`
+
 | Action | Keys |
 | --- | --- |
-| Focus window | `Alt+h/j/k/l` |
-| Move window | `Alt+Shift+h/j/k/l` |
-| Resize window | `Alt+Shift+-` / `Alt+Shift+=` |
-| Toggle tiles / accordion layout | `Alt+/` / `Alt+,` |
-| Workspace `1`-`4` | `Alt+1/2/3/4` |
-| Workspace `Terminal` / `Notes` | `Alt+t` / `Alt+n` |
-| Send window to workspace | `Alt+Shift+1/2/3/4`, `Alt+Shift+t`, `Alt+Shift+n` |
-| Previous workspace | `Alt+Tab` |
-| Move current workspace to next monitor | `Alt+Shift+Tab` |
-| Enter service mode | `Alt+Shift+;` |
+| Focus window | `Option+h/j/k/l` |
+| Move window | `Option+Shift+h/j/k/l` |
+| Resize window | `Option+Shift+-` / `Option+Shift+=` |
+| Toggle tiles / accordion layout | `Option+/` / `Option+,` |
+| Workspace `1`-`4` | `Option+1/2/3/4` |
+| Workspace `Terminal` / `Notes` | `Option+t` / `Option+n` |
+| Send window to workspace | `Option+Shift+1/2/3/4`, `Option+Shift+t`, `Option+Shift+n` |
+| Previous workspace | `Option+Tab` |
+| Move current workspace to next monitor | `Option+Shift+Tab` |
+| Enter service mode | `Option+Shift+;` |
 
 Service mode:
 
@@ -74,9 +78,11 @@ Service mode:
 | Reset layout tree | `r` |
 | Toggle floating / tiling | `f` |
 | Close all windows except current | `Backspace` |
-| Join with left/down/up/right | `Alt+Shift+h/j/k/l` |
+| Join with left/down/up/right | `Option+Shift+h/j/k/l` |
 
 ### nvim
+
+Leader: `Space`
 
 | Action | Keys |
 | --- | --- |
@@ -100,13 +106,3 @@ Lazy UI:
 | Install / update / sync | `I` / `U` / `S` |
 | Check / clean / restore | `C` / `X` / `R` |
 | Show details / close | `Enter` / `q` |
-
----
-
-### Pull updates on a machine
-
-```bash
-chezmoi update
-```
-
-Optional: `chezmoi status` shows pending differences. `chezmoi apply` reapplies the current source state without fetching remote changes.
