@@ -2,6 +2,10 @@
 eval "$(/opt/homebrew/bin/brew shellenv)"
 export HOMEBREW_NO_AUTO_UPDATE=1
 
+# Bun
+export BUN_INSTALL="$HOME/.bun"
+[[ -d "$BUN_INSTALL/bin" ]] && path=("$BUN_INSTALL/bin" $path)
+
 # Auto-start tmux session if not in Cursor, VSCode, or already in tmux
 if which tmux >/dev/null 2>&1; then
   if [[ -z "$TMUX" && \
