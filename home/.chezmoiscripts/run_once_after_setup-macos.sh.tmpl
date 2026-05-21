@@ -4,8 +4,8 @@ set -e
 
 echo "==> Applying macOS system defaults..."
 
-# Enable key repeats
-defaults write -g ApplePressAndHoldEnabled -bool false
+# Dis/Enable key repeats
+# defaults write -g ApplePressAndHoldEnabled -bool false
 
 # Disable prompting to use new exteral drives as Time Machine volume
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
@@ -22,25 +22,19 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 # Avoid .DS_Store files on USB / removable drives
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
-# Show path bar
-defaults write com.apple.finder ShowPathbar -bool true
-
-# Show hidden files inside the finder
-defaults write com.apple.finder "AppleShowAllFiles" -bool true
-
-# Show Status Bar
-defaults write com.apple.finder "ShowStatusBar" -bool true
-
-# Do not show warning when changing the file extension
-defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
-
 # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
 defaults write com.apple.screencapture type -string "png"
 
 # Set dark mode
 defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
 
-# Set Dock autohide
+# Finder setup
+defaults write com.apple.finder ShowPathbar -bool true
+defaults write com.apple.finder "AppleShowAllFiles" -bool true
+defaults write com.apple.finder "ShowStatusBar" -bool true
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+# Dock setup
 defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock orientation -string "left"
 defaults write com.apple.dock magnification -bool true
@@ -48,6 +42,10 @@ defaults write com.apple.dock largesize -float 48
 defaults write com.apple.dock "minimize-to-application" -bool true
 defaults write com.apple.dock tilesize -float 32
 defaults write com.apple.dock show-recents -bool false
+defaults write com.apple.dock wvous-tl-corner -int 0
+defaults write com.apple.dock wvous-tr-corner -int 0
+defaults write com.apple.dock wvous-bl-corner -int 0
+defaults write com.apple.dock wvous-br-corner -int 0
 
 # Hide Siri from menu bar (may require logout)
 defaults write com.apple.Siri StatusMenuVisible -bool false
