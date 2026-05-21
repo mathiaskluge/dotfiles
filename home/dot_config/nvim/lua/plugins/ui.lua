@@ -81,32 +81,4 @@ return {
 			},
 		},
 	},
-
-	-- Indent guides
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		event = { "BufReadPost", "BufNewFile" },
-		main = "ibl",
-		opts = {
-			indent = {
-				char = "│",
-				tab_char = "│",
-			},
-			scope = { enabled = false },
-			exclude = {
-				filetypes = { "help", "lazy", "mason", "notify", "oil" },
-			},
-		},
-	},
-
-	-- Better notifications
-	{
-		"j-hui/fidget.nvim",
-		event = "LspAttach",
-		opts = {
-			notification = {
-				window = { winblend = 0 },
-			},
-		},
-	},
 }

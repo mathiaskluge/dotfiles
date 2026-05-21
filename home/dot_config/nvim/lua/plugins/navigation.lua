@@ -1,60 +1,83 @@
+local function telescope_picker(name, opts)
+	return function()
+		local ok, builtin = pcall(require, "telescope.builtin")
+		if not ok then
+			vim.notify("Telescope is unavailable", vim.log.levels.ERROR)
+			return
+		end
+
+		builtin[name](opts or {})
+	end
+end
+
 return {
 	-- Telescope (fuzzy finder)
-	-- Note: Using master branch for Neovim 0.11 compatibility (ft_to_lang fix)
 	{
 		"nvim-telescope/telescope.nvim",
-		branch = "master",
+		tag = "0.1.8",
 		cmd = "Telescope",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			{
-				"nvim-telescope/telescope-fzf-native.nvim",
-				build = "make",
-				cond = function()
-					return vim.fn.executable("make") == 1
-				end,
-			},
-		},
+		dependencies = { "nvim-lua/plenary.nvim" },
 		keys = {
-			{ "<leader>ff", "<cmd>Telescope find_files<CR>", desc = "Find files" },
-			{ "<leader>fg", "<cmd>Telescope live_grep<CR>", desc = "Live grep" },
-			{ "<leader>fb", "<cmd>Telescope buffers<CR>", desc = "Buffers" },
-			{ "<leader>fr", "<cmd>Telescope oldfiles<CR>", desc = "Recent files" },
-			{ "<leader>fw", "<cmd>Telescope grep_string<CR>", desc = "Grep word under cursor" },
-			{ "<leader>fh", "<cmd>Telescope help_tags<CR>", desc = "Help" },
-			{ "<leader><leader>", "<cmd>Telescope buffers<CR>", desc = "Buffers" },
-			{ "<leader>/", "<cmd>Telescope live_grep<CR>", desc = "Grep" },
+			{
+				"<leader>ff",
+				telescope_picker("find_files", { hidden = true }),
+				desc = "Find files",
+			},
+			{
+				"<leader>fg",
+				telescope_picker("live_grep"),
+				desc = "Live grep",
+			},
+			{
+				"<leader>fb",
+				telescope_picker("buffers"),
+				desc = "Buffers",
+			},
+			{
+				"<leader>fr",
+				telescope_picker("oldfiles"),
+				desc = "Recent files",
+			},
+			{
+				"<leader>fw",
+				telescope_picker("grep_string"),
+				desc = "Grep word under cursor",
+			},
+			{
+				"<leader>fh",
+				telescope_picker("help_tags"),
+				desc = "Help",
+			},
+			{
+				"<leader><leader>",
+				telescope_picker("buffers"),
+				desc = "Buffers",
+			},
+			{
+				"<leader>/",
+				telescope_picker("current_buffer_fuzzy_find"),
+				desc = "Search current buffer",
+			},
 		},
 		opts = {
 			defaults = {
-				prompt_prefix = " ",
-				selection_caret = " ",
+				prompt_prefix = "  ",
+				selection_caret = "  ",
+				sorting_strategy = "ascending",
 				layout_config = {
+					prompt_position = "top",
 					horizontal = { preview_width = 0.5 },
 				},
-				file_ignore_patterns = { "node_modules", ".git/" },
-				mappings = {
-					i = {
-						["<C-j>"] = "move_selection_next",
-						["<C-k>"] = "move_selection_previous",
-						["<Esc>"] = "close",
-					},
-				},
+				file_ignore_patterns = { ".git/", "node_modules/" },
 			},
 			pickers = {
-				find_files = { hidden = true },
 				buffers = {
 					sort_lastused = true,
-					mappings = {
-						i = { ["<C-d>"] = "delete_buffer" },
-					},
 				},
 			},
 		},
 		config = function(_, opts)
-			local telescope = require("telescope")
-			telescope.setup(opts)
-			pcall(telescope.load_extension, "fzf")
+			require("telescope").setup(opts)
 		end,
 	},
 
@@ -91,24 +114,6 @@ return {
 				["q"] = "actions.close",
 				["<Esc>"] = "actions.close",
 			},
-		},
-	},
-
-	-- Seamless tmux/nvim navigation
-	{
-		"christoomey/vim-tmux-navigator",
-		event = "VeryLazy",
-		cmd = {
-			"TmuxNavigateLeft",
-			"TmuxNavigateDown",
-			"TmuxNavigateUp",
-			"TmuxNavigateRight",
-		},
-		keys = {
-			{ "<C-h>", "<cmd>TmuxNavigateLeft<CR>", desc = "Navigate left" },
-			{ "<C-j>", "<cmd>TmuxNavigateDown<CR>", desc = "Navigate down" },
-			{ "<C-k>", "<cmd>TmuxNavigateUp<CR>", desc = "Navigate up" },
-			{ "<C-l>", "<cmd>TmuxNavigateRight<CR>", desc = "Navigate right" },
 		},
 	},
 }
