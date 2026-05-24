@@ -10,6 +10,7 @@ brew "neovim"
 
 cask "firefox"
 cask "ghostty"
+cask "zed"
 cask "font-jetbrains-mono-nerd-font"
 cask "1password"
 cask "keepingyouawake"

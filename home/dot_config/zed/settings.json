@@ -1,0 +1,21 @@
+{
+  "theme": "Ayu Dark",
+  "project_panel": {
+    "dock": "left"
+  },
+  "git_panel": {
+    "dock": "left"
+  },
+  "theme_overrides": {
+    "Ayu Dark": {
+      "elevated_surface.background": "#0B0E14FF",
+      "surface.background": "#0B0E14FF",
+      "tab_bar.background": "#0B0E14FF",
+      "tab.inactive_background": "#0B0E14FF",
+      "panel.background": "#0B0E14FF",
+      "editor.subheader.background": "#0B0E14FF",
+      "editor.highlighted_line.background": "#0B0E14FF",
+      "panel.overlay_background": "#0B0E14FF"
+    }
+  }
+}
