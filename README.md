@@ -2,12 +2,12 @@
 
 My macOS dotfiles managed with [chezmoi](https://www.chezmoi.io/) and [Homebrew](https://brew.sh/).
 
-Sets up a new Mac with on command and manages configs accross devices.
+Sets up a new Mac with a single command and manages configs accross devices.
 
 ## What it does
 
 1. InstallsXcode CLI tools, Homebrew, chezmoi
-2. Initializes chezmoi with this dotfiles repo and applies it
+2. Initializes chezmoi with a github dotfiles repo and applies it
 3. Applies macOS settings
 4. Installs software via homebrew
 
@@ -21,11 +21,11 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/mathiaskluge/dotfiles/ma
 
 Use the install script as is. It prompts for a GitHub username to intialize chezmoi (requires this repo structure `{github_username}/dotfiles`).
 
-Or use the enitire structure replace contents of `home/` (the managed files by chezmoi) with your personal configs.
+Or use the entire structure and replace contents of `/home` (the managed files by chezmoi) with your personal configs.
 
 Note:
 - [run_once_after_setup-macos.sh.tmpl](https://github.com/mathiaskluge/dotfiles/blob/main/home/.chezmoiscripts/run_once_after_setup-macos.sh.tmpl) applies macOS settings. Customize or remove
-- [.chezmoi.toml.tmpl](https://github.com/mathiaskluge/dotfiles/blob/main/.chezmoi.toml.tmpl) captures name and email to be used in e.g. a gitconfig. Use or remove.
+- [.chezmoi.toml.tmpl](https://github.com/mathiaskluge/dotfiles/blob/main/.chezmoi.toml.tmpl) captures name and email to be used for gitconfig. Use or remove.
 
 ## Updates
 
@@ -35,7 +35,7 @@ After changes to dotfile repo run on local machine
 chezmoi update
 ```
 
-Optional: `chezmoi status` shows pending differences. `chezmoi apply` reapplies the current source state without fetching remote changes.
+Optional: `chezmoi status` shows pending diffs. `chezmoi apply` reapplies the current source state without fetching remote changes.
 
 ## Keybindings
 
