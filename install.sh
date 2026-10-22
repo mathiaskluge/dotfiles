@@ -2,11 +2,18 @@
 
 set -e
 
-# Colors for output
-RED=$(tput setaf 1)
-GREEN=$(tput setaf 2)
-BLUE=$(tput setaf 4)
-RESET=$(tput sgr0)
+# Colors for interactive terminals
+if [[ -t 1 ]] && command -v tput >/dev/null 2>&1; then
+    RED=$(tput setaf 1)
+    GREEN=$(tput setaf 2)
+    BLUE=$(tput setaf 4)
+    RESET=$(tput sgr0)
+else
+    RED=""
+    GREEN=""
+    BLUE=""
+    RESET=""
+fi
 
 info() {
     printf "${BLUE}==> %s${RESET}\n" "$1"
@@ -72,7 +79,7 @@ else
     read -p "GitHub username for dotfiles repo [mathiaskluge]: " github_user
     github_user=${github_user:-mathiaskluge}
 
-    chezmoi init --apply ${github_user}/dotfiles
+    chezmoi init --apply "${github_user}/dotfiles"
 fi
 
 success "Dotfiles installation complete!"

@@ -32,7 +32,7 @@ autocmd("BufReadPost", {
 -- Close some filetypes with q
 autocmd("FileType", {
 	group = augroup("close_with_q", { clear = true }),
-	pattern = { "help", "man", "qf", "checkhealth", "lspinfo", "notify", "query" },
+	pattern = { "help", "man", "qf", "checkhealth", "query" },
 	callback = function(event)
 		vim.bo[event.buf].buflisted = false
 		vim.keymap.set("n", "q", "<cmd>close<CR>", { buffer = event.buf, silent = true })
@@ -46,7 +46,7 @@ autocmd("BufWritePre", {
 		if event.match:match("^%w%w+://") then
 			return
 		end
-		local file = vim.loop.fs_realpath(event.match) or event.match
+		local file = vim.uv.fs_realpath(event.match) or event.match
 		vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
 	end,
 })

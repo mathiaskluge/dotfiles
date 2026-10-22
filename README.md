@@ -2,14 +2,14 @@
 
 My macOS dotfiles managed with [chezmoi](https://www.chezmoi.io/) and [Homebrew](https://brew.sh/).
 
-Sets up a new Mac with a single command and manages configs accross devices.
+Sets up a new Mac with a single command and manages configs across devices.
 
 ## What it does
 
-1. InstallsXcode CLI tools, Homebrew, chezmoi
-2. Initializes chezmoi with a github dotfiles repo and applies it
+1. Installs Xcode CLI tools, Homebrew, and chezmoi
+2. Initializes chezmoi with a GitHub dotfiles repo and applies it
 3. Applies macOS settings
-4. Installs software via homebrew
+4. Installs software via Homebrew
 
 ## Setup
 
@@ -19,13 +19,11 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/mathiaskluge/dotfiles/ma
 
 ## How to use
 
-Use the install script as is. It prompts for a GitHub username to intialize chezmoi (requires this repo structure `{github_username}/dotfiles`).
+Use the install script as is. It prompts for a GitHub username to initialize chezmoi (requires this repo structure: `{github_username}/dotfiles`).
 
 Or use the entire structure and replace contents of `/home` (the managed files by chezmoi) with your personal configs.
 
-Note:
-- [run_once_after_setup-macos.sh.tmpl](https://github.com/mathiaskluge/dotfiles/blob/main/home/.chezmoiscripts/run_once_after_setup-macos.sh.tmpl) applies macOS settings. Customize or remove
-- [.chezmoi.toml.tmpl](https://github.com/mathiaskluge/dotfiles/blob/main/.chezmoi.toml.tmpl) captures name and email to be used for gitconfig. Use or remove.
+The [macOS setup script](https://github.com/mathiaskluge/dotfiles/blob/main/home/.chezmoiscripts/run_once_after_setup-macos.sh.tmpl) applies system settings. Customize or remove it as needed.
 
 ## Updates
 
@@ -93,9 +91,6 @@ Leader: `Space`
 | Grep word under cursor | `Space fw` |
 | Help tags | `Space fh` |
 | Search current buffer | `Space /` |
-| Harpoon add file | `Space a` |
-| Harpoon menu | `Space h` |
-| Harpoon slots `1`-`4` | `Space 1/2/3/4` |
 
 Lazy UI:
 

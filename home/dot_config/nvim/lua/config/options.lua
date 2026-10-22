@@ -39,10 +39,6 @@ opt.undodir = vim.fn.stdpath("data") .. "/undo"
 opt.splitright = true
 opt.splitbelow = true
 
--- Completion
-opt.completeopt = { "menu", "menuone", "noselect" }
-opt.pumheight = 10
-
 -- Timing
 opt.updatetime = 250
 opt.timeoutlen = 300

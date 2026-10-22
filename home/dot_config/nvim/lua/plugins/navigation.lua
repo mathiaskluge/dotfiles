@@ -14,7 +14,7 @@ return {
 	-- Telescope (fuzzy finder)
 	{
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.8",
+		tag = "v0.2.2",
 		cmd = "Telescope",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		keys = {
@@ -79,41 +79,5 @@ return {
 		config = function(_, opts)
 			require("telescope").setup(opts)
 		end,
-	},
-
-	-- Harpoon (quick file marks)
-	{
-		"ThePrimeagen/harpoon",
-		branch = "harpoon2",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		keys = {
-			{ "<leader>a", function() require("harpoon"):list():add() end, desc = "Harpoon add" },
-			{ "<leader>h", function() require("harpoon").ui:toggle_quick_menu(require("harpoon"):list()) end, desc = "Harpoon menu" },
-			{ "<leader>1", function() require("harpoon"):list():select(1) end, desc = "Harpoon 1" },
-			{ "<leader>2", function() require("harpoon"):list():select(2) end, desc = "Harpoon 2" },
-			{ "<leader>3", function() require("harpoon"):list():select(3) end, desc = "Harpoon 3" },
-			{ "<leader>4", function() require("harpoon"):list():select(4) end, desc = "Harpoon 4" },
-		},
-		opts = {},
-	},
-
-	-- Oil (file explorer as buffer)
-	{
-		"stevearc/oil.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		keys = {
-			{ "-", "<cmd>Oil<CR>", desc = "Open parent directory" },
-		},
-		opts = {
-			default_file_explorer = true,
-			columns = { "icon" },
-			view_options = {
-				show_hidden = true,
-			},
-			keymaps = {
-				["q"] = "actions.close",
-				["<Esc>"] = "actions.close",
-			},
-		},
 	},
 }
